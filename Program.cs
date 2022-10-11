@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using Urna.CLI.Mesário;
 using Urna.CLI.Models;
-using Urna.CLI.Services;
 
 namespace Urna.CLI
 {
     public class Program
     {
-
         static void Main(string[] args)
         {
             Inicializadora inicializadora = new Inicializadora();   
-            inicializadora.CriarCandidatos();                       //Cria os candidatos
+            inicializadora.CriarCandidatos();
             inicializadora.CriarUmEleitor();
 
-            MesarioService.EmitirAZeresima();                       //Emite a zerésima
+            MesarioController mesario = new MesarioController();
+            mesario.EmitirAZeresima();
 
-            UrnaServices.MenuInicalUrna();                          //Vai para a votação
-
+            // repetição enquanto houver eleitor que não tiver votado
+            UrnaController urna = new UrnaController();
+            urna.MenuInicialUrna();
         }
-
-        
     }
 }

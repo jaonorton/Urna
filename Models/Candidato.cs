@@ -9,7 +9,7 @@ namespace Urna.CLI.Models
         public int Numero;
         public string Nome;
         public string Partido;
-        public int VotosRecebidos; //mudar responsabilidade dps
+        public int VotosRecebidos; 
     }
 
 }

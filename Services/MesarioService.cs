@@ -1,57 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Urna.CLI.DAO;
 using Urna.CLI.Models;
-using Urna.CLI.Services;
 
-namespace Urna.CLI.Mesário
+namespace Urna.CLI.Services
 {
     public class MesarioService
     {
-        static CandidatosServices _candidatosServices = new CandidatosServices();
-
-        public static void EmitirAZeresima()
+        public Eleitor ObterEleitor(string tituloASerProcurado)
         {
-            List<Candidato> candidatos = _candidatosServices.BuscarCandidatos();
-
-            Console.WriteLine("EMISSÃO DA ZERÉSIMA\n");
-            foreach (var item in candidatos)
+            if(EleitorDAO.Eleitores.Any(x=>x.Titulo == tituloASerProcurado))
             {
-                Console.WriteLine("Candidato: " + item.Nome + "  Votos: " + item.VotosRecebidos);
-                Console.WriteLine("\n");
+                Eleitor eleitorASerEncontrado = EleitorDAO.Eleitores.Where(item => item.Titulo == tituloASerProcurado).First();
+                return eleitorASerEncontrado;
             }
 
-            Console.WriteLine("\nZERÉSIMA EMITIDA, APERTE QUALQUER TECLA PARA CONTINUAR");
-            Console.ReadLine();
-            Console.Clear();
+            return null;
         }
-
-        static public void PegarOTitulo()
-        {
-            Console.Clear();
-            Console.WriteLine("Insira o título de eleitor:");
-            string tituloDeEleitor = Console.ReadLine();
-
-            bool votoJaComputado = JaVotou(tituloDeEleitor);
-
-            if (votoJaComputado)
-            {
-                Console.WriteLine("\nVoto já computado");
-                PegarOTitulo();
-            }
-            else
-            {
-                UrnaServices.MenuVotacao(tituloDeEleitor);
-            }
-
-        }
-        public static bool JaVotou(string tituloASerProcurado)
-        {
-            //Eleitor eleitorASerEncontrado = EleitorDAO.Eleitores.Where(item => item.Titulo == tituloASerProcurado).First();
-            return false;
-        }
-
     }
 }

@@ -25,6 +25,8 @@ namespace Urna.CLI
                 Numero = 12,
                 Partido = "PDT"
             });
+
+            // TODO: Faz sentido nulo ser um candidato
             CandidatoDAO.Candidatos.Add(new Candidato
             {
                 Nome = "Nulo",
@@ -35,13 +37,14 @@ namespace Urna.CLI
 
         public void CriarUmEleitor()
         {
-            EleitorDAO.Eleitores.Add(new Eleitor
+            for (int i = 0; i < 20; i++)
             {
-                Titulo = "000000000",
-                JaVotou = true
-            });
-
+                EleitorDAO.Eleitores.Add(new Eleitor
+                {
+                    Titulo = i.ToString("D3"),
+                    JaVotou = false
+                });
+            }
         }
-
     }
 }
